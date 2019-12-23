@@ -2,7 +2,7 @@
 #define PLAYEROBJECTS_H
 #endif
 #include <GLFW\glfw3.h>
-#include "linmath.h"
+#include <math.h>
 
 
 
