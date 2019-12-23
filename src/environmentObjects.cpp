@@ -20,7 +20,6 @@ void gameEnvironmentObject::drawObject()
 }
 
 
-
 void gameEnvironmentObject::checkEnvironmentLoop()
 {
 	if (xLocation > 1.025)
@@ -74,12 +73,18 @@ void getGravityEnvironment(gameEnvironmentObject &env1, gameEnvironmentObject &e
 }
 
 
+bool gameEnvironmentObject::getActive() {
+	return active;
+}
+
+
 
 
 //other 
 
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+
 }
 
 
