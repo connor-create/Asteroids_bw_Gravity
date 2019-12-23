@@ -7,7 +7,6 @@
 
 
 
-
 // used to create player objects such as the main player of ship, might use this class for another game object, idk
 
 class gamePlayerObject

@@ -6,6 +6,7 @@
 
 
 
+
 void environmentFunctions::keyStrokes(GLFWwindow* window, gamePlayerObject& ship, environmentFunctions& projectiles)
 {
 	glfwSetKeyCallback(window, keyCallback);
@@ -96,11 +97,11 @@ void environmentFunctions::addProjectile(gamePlayerObject& player, environmentFu
 
 void environmentFunctions::drawProjectiles(environmentFunctions& projectiles)
 { 
-	bool clear = false;
+	int clear;
 	int vectSize = projectiles.projectileContainer.size();
 	for (int i = 0; i < vectSize; i++)
 	{
-		clear = false;
+		clear = NULL;
 		glBegin(GL_POLYGON);
 		projectile tempPro = projectiles.projectileContainer[i];
 		GLfloat radius = .003;
@@ -117,12 +118,9 @@ void environmentFunctions::drawProjectiles(environmentFunctions& projectiles)
 		tempPro.yLocation = tempPro.yLocation + tempPro.ySpeed;
 		projectiles.projectileContainer[i] = tempPro;
 		glEnd();
-		clear = environmentFunctions::projectileCheckAndClear(projectiles, i);
-		if (clear == true)
-		{
 
-		}
 	}
+	environmentFunctions::projectileCheckAndClear(projectiles);
 
 }
 
@@ -139,44 +137,48 @@ void environmentFunctions::addProjectileTick(environmentFunctions& projectiles)
 }
 
 
-int environmentFunctions::getProjectileTicks(environmentFunctions& projectiles)
+void environmentFunctions::projectileCheckAndClear(environmentFunctions& projectiles)
 {
+	std::vector<int> index;
+	for (int i = 0; i < projectiles.projectileContainer.size(); i++) {
+		if (projectiles.projectileContainer[i].xLocation > 1.025)
+		{
+			index.push_back(i);
+		}
+		else if (projectiles.projectileContainer[i].xLocation < -1.025)
+		{
+			index.push_back(i);
+		}
+		else if (projectiles.projectileContainer[i].yLocation > 1.025)
+		{
+			index.push_back(i);
+		}
+		else if (projectiles.projectileContainer[i].yLocation < -1.025)
+		{
+			index.push_back(i);
+		}
+	}
+	for (int j = 0; j < index.size(); j++){
+		int tempIndex = index[j];
+		projectiles.projectileContainer.erase(projectiles.projectileContainer.begin() + tempIndex);
+	}
+}
+
+
+int environmentFunctions::getProjectileTicks(environmentFunctions& projectiles){
+
 	return projectiles.projectileTicks;
 }
 
 
-void environmentFunctions::resetProjectileTick(environmentFunctions& projectiles)
-{
+void environmentFunctions::resetProjectileTick(environmentFunctions& projectiles){
 
 	projectiles.projectileTicks = 0;
 }
 
 
-bool environmentFunctions::projectileCheckAndClear(environmentFunctions& projectiles, int index)
-{
-	if (projectiles.projectileContainer[index].xLocation > 1.025)
-	{
-		projectiles.projectileContainer.erase(projectiles.projectileContainer.begin()+index);
-		return true;
-	}
-	else if (projectiles.projectileContainer[index].xLocation < -1.025)
-	{
-		projectiles.projectileContainer.erase(projectiles.projectileContainer.begin() + index);
-		return true;
-	}
-	else if (projectiles.projectileContainer[index].yLocation > 1.025)
-	{
-		projectiles.projectileContainer.erase(projectiles.projectileContainer.begin() + index);
-		return true;
-	}
-	else if (projectiles.projectileContainer[index].yLocation < -1.025)
-	{
-		projectiles.projectileContainer.erase(projectiles.projectileContainer.begin() + index);
-		return true;
-	}
-}
+void environmentFunctions::printProSize(environmentFunctions& projectiles) {
 
-void environmentFunctions::printProSize(environmentFunctions& projectiles)
-{
 	std::cout << projectiles.projectileContainer.size() << std::endl;
 }
+

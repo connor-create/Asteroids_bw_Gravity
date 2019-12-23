@@ -5,10 +5,6 @@
 #include <math.h>
 #include <vector>
 
-
-
-
-
 class projectile
 {
 
@@ -33,7 +29,7 @@ public:
 	static void addProjectileTick(environmentFunctions& projectiles);
 	static void resetProjectileTick(environmentFunctions& projectiles);
 	static int getProjectileTicks(environmentFunctions& projectiles);
-	static bool projectileCheckAndClear(environmentFunctions& projectiles, int index);
+	static void projectileCheckAndClear(environmentFunctions& projectiles);
 	static void printProSize(environmentFunctions& projectiles);
 
 };
