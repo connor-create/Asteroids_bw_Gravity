@@ -16,14 +16,14 @@ class gameEnvironmentObject
 	GLfloat totalspeed = sqrt(pow(xSpeed, 2) + pow(ySpeed, 2));
 	GLfloat rDeg;
 	GLfloat radius;
-	bool move;
+	bool active;
 	int type;
 	float mass;
 	// type  1==asteroid  2==planet
 public:
-	gameEnvironmentObject(GLfloat x, GLfloat y, GLfloat speedx, GLfloat speedy, GLfloat degrees, float massIn, int typeIn, GLfloat radiusIn, bool staticID)
+	gameEnvironmentObject(GLfloat x, GLfloat y, GLfloat speedx, GLfloat speedy, GLfloat degrees, float massIn, int typeIn, GLfloat radiusIn, bool exists)
 	{
-		move = staticID;
+		active = exists;
 		xLocation = x;
 		yLocation = y;
 		xSpeed = speedx;
@@ -40,6 +40,7 @@ public:
 	GLfloat getYLocation();
 	GLfloat getMass();
 	GLfloat getRadius();
+	bool getActive();
 };
 
 

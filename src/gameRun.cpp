@@ -27,6 +27,8 @@ int main(void)
 	int key;
 	gamePlayerObject ship(0, 0, 0, 0, 90);
 	gameEnvironmentObject planet1(-.40, .40, 0, 0, 0, 100, 2, .1, true);
+	gameEnvironmentObject planet2(.40, .40, 0, 0, 0, 100, 2, .1, false);
+	environmentFunctions asteroids;
 	environmentFunctions projectiles;
 	while (!glfwWindowShouldClose(window))
 	{
@@ -36,7 +38,7 @@ int main(void)
 		ratio = width / (float)height;
 		glViewport(0, 0, width, height);
 		glClear(GL_COLOR_BUFFER_BIT);
-		environmentFunctions::getGravityPlayer(planet1, ship);	
+		environmentFunctions::gravityAdjust(projectiles, ship, planet1, planet2, asteroids);
 		environmentFunctions::keyStrokes(window, ship, projectiles);
 		ship.checkEnvironmentLoop();
 		r = 0;

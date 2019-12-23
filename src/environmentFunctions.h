@@ -5,10 +5,10 @@
 #include <math.h>
 #include <vector>
 
-class projectile
+struct projectile
 {
 
-public:
+
 	GLfloat xSpeed;
 	GLfloat ySpeed;
 	GLfloat xLocation;
@@ -23,7 +23,6 @@ class environmentFunctions
 
 public:
 	static void keyStrokes(GLFWwindow* window, gamePlayerObject& ship, environmentFunctions& projectiles);
-	static void getGravityPlayer(gameEnvironmentObject& env1, gamePlayerObject& player);
 	static void addProjectile(gamePlayerObject& player, environmentFunctions& projectiles);
 	static void drawProjectiles(environmentFunctions& projectiles);
 	static void addProjectileTick(environmentFunctions& projectiles);
@@ -31,6 +30,8 @@ public:
 	static int getProjectileTicks(environmentFunctions& projectiles);
 	static void projectileCheckAndClear(environmentFunctions& projectiles);
 	static void printProSize(environmentFunctions& projectiles);
+	static void gravityAdjust(environmentFunctions& projectiles, gamePlayerObject& player, gameEnvironmentObject& env1, gameEnvironmentObject& env2, environmentFunctions& asteroids);
+	static void checkAllCollision(environmentFunctions& projectiles, gamePlayerObject& player, gameEnvironmentObject& planet1, gameEnvironmentObject& planet2, gameEnvironmentObject& asteroids);
 
 };
 
